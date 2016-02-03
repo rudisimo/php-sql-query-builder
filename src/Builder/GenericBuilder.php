@@ -61,6 +61,7 @@ class GenericBuilder implements BuilderInterface
     private $queryWriterArray = [
         'SELECT' => '\NilPortugues\Sql\QueryBuilder\Builder\Syntax\WriterFactory::createSelectWriter',
         'INSERT' => '\NilPortugues\Sql\QueryBuilder\Builder\Syntax\WriterFactory::createInsertWriter',
+        'REPLACE' => '\NilPortugues\Sql\QueryBuilder\Builder\Syntax\WriterFactory::createReplaceWriter',
         'UPDATE' => '\NilPortugues\Sql\QueryBuilder\Builder\Syntax\WriterFactory::createUpdateWriter',
         'DELETE' => '\NilPortugues\Sql\QueryBuilder\Builder\Syntax\WriterFactory::createDeleteWriter',
         'INTERSECT' => '\NilPortugues\Sql\QueryBuilder\Builder\Syntax\WriterFactory::createIntersectWriter',
@@ -77,6 +78,7 @@ class GenericBuilder implements BuilderInterface
     private $queryWriterInstances = [
         'SELECT' => null,
         'INSERT' => null,
+        'REPLACE' => null,
         'UPDATE' => null,
         'DELETE' => null,
         'INTERSECT' => null,
@@ -123,6 +125,17 @@ class GenericBuilder implements BuilderInterface
     public function insert($table = null, array $values = null)
     {
         return $this->injectBuilder(QueryFactory::createInsert($table, $values));
+    }
+
+    /**
+     * @param string $table
+     * @param array  $values
+     *
+     *@return AbstractBaseQuery
+     */
+    public function replace($table = null, array $values = null)
+    {
+        return $this->injectBuilder(QueryFactory::createReplace($table, $values));
     }
 
     /**

@@ -43,6 +43,17 @@ final class QueryFactory
      * @param string $table
      * @param array  $values
      *
+     * @return Insert
+     */
+    public static function createReplace($table = null, array $values = null)
+    {
+        return new Replace($table, $values);
+    }
+
+    /**
+     * @param string $table
+     * @param array  $values
+     *
      * @return Update
      */
     public static function createUpdate($table = null, array $values = null)

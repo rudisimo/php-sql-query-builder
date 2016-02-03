@@ -65,6 +65,17 @@ final class WriterFactory
      * @param GenericBuilder    $writer
      * @param PlaceholderWriter $placeholderWriter
      *
+     * @return InsertWriter
+     */
+    public static function createReplaceWriter(GenericBuilder $writer, PlaceholderWriter $placeholderWriter)
+    {
+        return new ReplaceWriter($writer, $placeholderWriter);
+    }
+
+    /**
+     * @param GenericBuilder    $writer
+     * @param PlaceholderWriter $placeholderWriter
+     *
      * @return UpdateWriter
      */
     public static function createUpdateWriter(GenericBuilder $writer, PlaceholderWriter $placeholderWriter)

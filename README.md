@@ -33,6 +33,8 @@ An elegant lightweight and efficient SQL Query Builder with fluid interface SQL 
     * [3.6. MINUS Statement](#block3.6)
     * [3.7. UNION Statement](#block3.7)
     * [3.8. UNION ALL Statement](#block3.8)
+    * [3.9. REPLACE Statement](#block3.2)
+           * [3.9.1. Basic REPLACE statement](#block3.9.1)
 * [4. Advanced Quering](#block4)    
     * [4.1. Filtering using WHERE](#block4.1)
         * [4.1.1. Changing WHERE logical operator](#block4.2)     
@@ -756,6 +758,42 @@ $values = $builder->getValues();
 SELECT user.* FROM user
 UNION ALL
 SELECT user_email.* FROM user_email
+```
+
+<a name="block3.9"></a>
+### 3.9. INSERT Statement [↑](#index_block)
+
+The `REPLACE` statement is really straightforward.
+
+<a name="block3.9.1"></a>
+#### 3.9.1 Basic INSERT statement [↑](#index_block)
+
+#### Usage:
+```php
+<?php
+use NilPortugues\Sql\QueryBuilder\Builder\GenericBuilder;
+
+$builder = new GenericBuilder(); 
+
+$query = $builder->replace()
+    ->setTable('user')
+    ->setValues([
+        'user_id' => 1,
+        'name'    => 'Nil',
+        'contact' => 'contact@nilportugues.com',
+    ]);
+   
+$sql = $builder->writeFormatted($query);    
+$values = $builder->getValues();
+```
+
+#### Output
+```sql
+REPLACE INTO user (user.user_id, user.name, user.contact) VALUES (:v1, :v2, :v3)
+```
+
+```php
+[':v1' => 1, ':v2' => 'Nil', ':v3' => 'contact@nilportugues.com'];
 ```
 
 
